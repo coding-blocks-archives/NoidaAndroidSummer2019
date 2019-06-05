@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -9,24 +9,71 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button2"
+         <!--abc-->
+
+        <EditText
+            android:hint="Number 1"
+            android:id="@+id/editText1"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <EditText
+            android:hint="Number 2"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:id="@+id/editText2"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Button" />
+            android:layout_height="wrap_content"
+            />
 
-        <Button
-            android:id="@+id/button3"
-            android:onClick="button2Click"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Button" />
+
 
     </LinearLayout>
 
+
+
+    <TextView
+        android:layout_weight="1"
+        android:text="Result"
+        android:id="@+id/resultTv"
+        android:textSize="32sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/additionBtn"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/subtractBtn"
+        android:onClick="button2Click"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="-" />
+    <Button
+        android:id="@+id/multiplyBtn"
+        android:onClick="button2Click"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="*" />
+    <Button
+        android:id="@+id/divideBtn"
+        android:onClick="button2Click"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="/" />
     <!--ishan@cb-->
 </LinearLayout>
