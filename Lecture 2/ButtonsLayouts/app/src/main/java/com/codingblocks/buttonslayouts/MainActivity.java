@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -14,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv;
     EditText ed1,ed2;
     int a = 10,b = 10;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv = findViewById(R.id.resultTv);
         ed1 = findViewById(R.id.editText2);
         ed2 = findViewById(R.id.editText1);
+       ed1.setText(ed1.getText().toString().substring(0,ed1.length()-1));
 
 
 
@@ -39,10 +40,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 ////
 ////            }
 ////        };
+
+        btn1.hasFocus()
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
+        btn4.getText()
 
     }
 
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if(ed1.hasFocus())
         if (!ed1.getText().toString().equals("") && !ed2.getText().toString().equals("")) {
             a = Integer.parseInt(ed1.getText().toString());
             b = Integer.parseInt(ed2.getText().toString());

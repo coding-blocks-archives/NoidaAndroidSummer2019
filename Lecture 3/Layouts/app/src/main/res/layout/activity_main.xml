@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:layout_marginTop="32dp"
+        android:gravity="center|bottom"
+        android:textAlignment="textEnd"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/imgView"
+        android:text="Hello World!" />
+
+
+    <ImageView
+        android:src="@drawable/screenshot_1559550801"
+        android:id="@+id/imgView"
+        android:layout_centerInParent="true"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_below="@+id/imgView"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button 1" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_below="@id/button"
+        android:layout_toLeftOf="@id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button 2" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_below="@id/button"
+        android:layout_toRightOf="@id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button 3 " />
+
+</RelativeLayout>

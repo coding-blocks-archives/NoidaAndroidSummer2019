@@ -26,6 +26,7 @@
         <EditText
             android:hint="Number 2"
             android:padding="8dp"
+            android:inputType=""
             android:layout_margin="8dp"
             android:id="@+id/editText2"
             android:layout_weight="1"
