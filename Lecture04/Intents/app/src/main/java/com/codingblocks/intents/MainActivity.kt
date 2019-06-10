@@ -1,6 +1,7 @@
 package com.codingblocks.intents
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -16,9 +17,18 @@ val KEY_1 = "NAME"
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
-        val i = Intent(this, Main2Activity::class.java)
-        i.putExtra(KEY_1, edt1.text.toString())
-        startActivity(i)
+
+        //Intent to open Browser
+        //val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.${edt1.text.toString()}"))
+
+        //Intent to open Phone Dialer
+//        val i = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${edt1.text.toString()}"))
+
+
+        //Intent to open Gmail
+        val i = Intent(Intent.ACTION_SEND)
+        i.putExtra(Intent.EXTRA_TEXT,"Byeeee") // Body
+        startActivity(Intent.createChooser(i,"Send Email"))
     }
 
     private var btnViews = arrayOfNulls<Button>(3)
