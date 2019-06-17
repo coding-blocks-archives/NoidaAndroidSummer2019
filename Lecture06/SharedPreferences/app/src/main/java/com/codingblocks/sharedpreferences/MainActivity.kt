@@ -7,6 +7,7 @@ import androidx.core.content.edit
 import kotlinx.android.synthetic.main.activity_main.editText
 import kotlinx.android.synthetic.main.activity_main.restoreBtn
 import kotlinx.android.synthetic.main.activity_main.saveBtn
+import kotlinx.android.synthetic.main.activity_main.textView
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +16,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val prefs = getPreferences(Context.MODE_PRIVATE)
+
+
+        var appOpenCount = 0
+        appOpenCount = prefs.getInt("Count",0)
+        appOpenCount++
+
+        prefs.edit{
+            putInt("Count",appOpenCount)
+        }
+
+        textView.text = appOpenCount.toString()
 
 
         saveBtn.setOnClickListener {
