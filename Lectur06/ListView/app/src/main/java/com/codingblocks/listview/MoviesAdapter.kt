@@ -17,7 +17,9 @@ class MoviesAdapter(val movies: ArrayList<Movies>, val context: Context) : BaseA
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.item_movie, parent, false)
+
+        val view: View
+        view = convertView ?: inflater.inflate(R.layout.item_movie, parent, false)
 
         val nameView = view.movieName
         val actorNameView = view.actorName
