@@ -1,9 +1,12 @@
 package com.codingblocks.recyclerview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.rootView
 import kotlinx.android.synthetic.main.activity_main.rvMovies
 import java.util.*
 
@@ -23,8 +26,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val list: ArrayList<Movies> = getNRandomMovies(200)
+
+        rvMovies.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        rvMovies.layoutManager = GridLayoutManager(this,3,
+//            GridLayoutManager.HORIZONTAL,false)
+
+        Snackbar.make(rootView,"Hello",Snackbar.LENGTH_LONG).setAction("Click Me") {
+            Toast.makeText(this,"Hello",Toast.LENGTH_LONG).show()
+        }.show()
+
+        rvMovies.adapter = MoviesAdapter(list, this)
+    }
+
+    private fun getNRandomMovies(range: Int): ArrayList<Movies> {
+
         val list: ArrayList<Movies> = arrayListOf()
-        for (i in 0..99) {
+        for (i in 0..range) {
             val random = Random().nextInt(5)
             list.add(
                 Movies(
@@ -35,10 +53,6 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-        rvMovies.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-//        rvMovies.layoutManager = GridLayoutManager(this,3,
-//            GridLayoutManager.HORIZONTAL,false)
-
-        rvMovies.adapter = MoviesAdapter(list,this)
+        return list
     }
 }
