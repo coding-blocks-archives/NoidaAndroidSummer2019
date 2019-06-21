@@ -6,8 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <fragment
+        android:name="com.codingblocks.fragments.MarvelFragment"
+        android:id="@+id/marvelFrag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <include layout="@layout/content_main" />
+    <!--<include layout="@layout/content_main" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
