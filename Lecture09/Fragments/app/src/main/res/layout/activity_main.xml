@@ -3,21 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/marvelFrag"
-        android:name="com.codingblocks.fragments.MarvelFragment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/dc"
+            android:text="DC"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="Marvel"
+            android:id="@+id/marvel"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!--<fragment-->
+        <!--android:id="@+id/marvelFrag"-->
+        <!--android:name="com.codingblocks.fragments.MarvelFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1" />-->
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <!--<fragment-->
         <!--android:id="@+id/dcFrag"-->

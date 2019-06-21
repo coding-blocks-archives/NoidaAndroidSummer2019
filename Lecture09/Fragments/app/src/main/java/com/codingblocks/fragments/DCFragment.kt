@@ -19,10 +19,17 @@ class DCFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_marvel, container, false)
 
-        view.marvelLv.adapter = ArrayAdapter<String>(
-            requireContext(), android.R.layout.simple_list_item_1,
-            arrayOf("Wonder Woman", "Superman", "Aquaman", "Batman")
-        )
+        val name = arguments?.getString("NAME")
+        if (name == "DC")
+            view.marvelLv.adapter = ArrayAdapter<String>(
+                requireContext(), android.R.layout.simple_list_item_1,
+                arrayOf("Wonder Woman", "Superman", "Aquaman", "Batman")
+            )
+        else if(name == "MARVEL")
+            view.marvelLv.adapter = ArrayAdapter<String>(
+                requireContext(), android.R.layout.simple_list_item_1,
+                arrayOf("Iron Man","Captain America","Thor","Black Panther")
+            )
         return view
     }
 
