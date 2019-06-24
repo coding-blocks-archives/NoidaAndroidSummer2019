@@ -2,25 +2,26 @@ package com.codingblocks.bottomnavigation
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.nav_view
-import kotlinx.android.synthetic.main.activity_main.textMesaage
 
 class MainActivity : AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onNavigationItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.navigation_home -> {
-            textMesaage.setText(R.string.title_home)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, BlankFragment()).commit()
             true
         }
         R.id.navigation_dashboard -> {
-            textMesaage.setText(R.string.title_dashboard)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, BlankFragment2()).commit()
             true
         }
         R.id.navigation_notifications -> {
-            textMesaage.setText(R.string.title_notifications)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, BlankFragment3()).commit()
             true
         }
         else -> false
