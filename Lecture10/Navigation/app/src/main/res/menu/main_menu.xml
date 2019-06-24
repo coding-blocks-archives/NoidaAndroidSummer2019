@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/firstButton"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Hellow"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/secondButton"
+        android:title="Menu"
+        app:showAsAction="always" />
+
+</menu>
