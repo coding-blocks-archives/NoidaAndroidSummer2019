@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.getData
 import kotlinx.android.synthetic.main.activity_main.githubRv
 import org.json.JSONObject
@@ -63,17 +64,20 @@ class MainActivity : AppCompatActivity() {
             val userList = arrayListOf<GithubUser>()
 
 
-            val jsonData = JSONObject(result)
-            val userArray = jsonData.getJSONArray("items")
-            for (i in 0..9) {
+//            val jsonData = JSONObject(result)
+//            val userArray = jsonData.getJSONArray("items")
+//            for (i in 0..9) {
+//
+//                val user = GithubUser(
+//                    (userArray[i] as JSONObject).getString("login"),
+//                    (userArray[i] as JSONObject).getString("avatar_url"),
+//                    (userArray[i] as JSONObject).getInt("id")
+//                )
+//                userList.add(user)
+//            }
 
-                val user = GithubUser(
-                    (userArray[i] as JSONObject).getString("login"),
-                    (userArray[i] as JSONObject).getString("avatar_url"),
-                    (userArray[i] as JSONObject).getInt("id")
-                )
-                userList.add(user)
-            }
+            val user = Gson().fromJson(result, Github::class.java)
+            userList.addAll(user.items)
 
             githubRv.layoutManager = LinearLayoutManager(this@MainActivity)
             githubRv.adapter = GithubAdapter(this@MainActivity,userList)

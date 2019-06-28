@@ -27,7 +27,7 @@ class GithubAdapter(private val context: Context, private val arrayList: ArrayLi
 class GithubViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(user: GithubUser) {
         with(itemView) {
-            name.text = user.username
+            name.text = user.login
             Picasso.get().load(user.avatar_url).into(image)
         }
     }
