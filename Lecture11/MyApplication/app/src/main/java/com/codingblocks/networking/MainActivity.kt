@@ -2,9 +2,11 @@ package com.codingblocks.networking
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.getData
-import kotlinx.android.synthetic.main.activity_main.showData
+import kotlinx.android.synthetic.main.activity_main.githubRv
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -27,7 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateTextView() {
         val networkTask = NetworkTask()
-        networkTask.execute("https://api.github.com/search/users?q=%22Pulkit%20Aggarwal%22", "https://www.github.com/")
+        networkTask.execute(
+            "https://api.github.com/search/users?q=%22Pulkit%20Aggarwal%22",
+            "https://www.github.com/"
+        )
     }
 
     inner class NetworkTask : AsyncTask<String, Int, String>() {
@@ -53,9 +58,26 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: String?) {
 
-            val jsonData = JSONObject(result)
+            Log.i("Networking", result)
 
-            showData.text = result
+            val userList = arrayListOf<GithubUser>()
+
+
+            val jsonData = JSONObject(result)
+            val userArray = jsonData.getJSONArray("items")
+            for (i in 0..9) {
+
+                val user = GithubUser(
+                    (userArray[i] as JSONObject).getString("login"),
+                    (userArray[i] as JSONObject).getString("avatar_url"),
+                    (userArray[i] as JSONObject).getInt("id")
+                )
+                userList.add(user)
+            }
+
+            githubRv.layoutManager = LinearLayoutManager(this@MainActivity)
+            githubRv.adapter = GithubAdapter(this@MainActivity,userList)
+
         }
     }
 }
