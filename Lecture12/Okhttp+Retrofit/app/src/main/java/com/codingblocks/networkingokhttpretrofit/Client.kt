@@ -5,9 +5,14 @@ import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
+
 object Client {
+
+    //OKhttp
     val okHttpClient = OkHttpClient()
 
     fun getUrl(url: String): Request {
@@ -24,4 +29,13 @@ object Client {
 
         }
     }
+
+//Retrofit
+
+    val retrofitClient = Retrofit.Builder()
+        .baseUrl("https://api.github.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val service = retrofitClient.create(GithubService::class.java)
 }
