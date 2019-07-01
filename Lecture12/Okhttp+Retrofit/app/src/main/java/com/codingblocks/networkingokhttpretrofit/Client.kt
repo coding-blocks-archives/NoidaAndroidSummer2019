@@ -1,13 +1,12 @@
 package com.codingblocks.networkingokhttpretrofit
 
-import okhttp3.Call
-import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 
 
 object Client {
@@ -21,14 +20,14 @@ object Client {
             .build()
     }
 
-    fun okhttpCallback(fn: (Response?, Throwable?) -> Unit): Callback {
-        return object : Callback {
-            override fun onFailure(call: Call, e: IOException) = fn(null, e)
-
-            override fun onResponse(call: Call, response: Response) = fn(response, null)
-
-        }
-    }
+//    fun okhttpCallback(fn: (Response?, Throwable?) -> Unit): Callback {
+//        return object : Callback {
+//            override fun onFailure(call: Call, e: IOException) = fn(null, e)
+//
+//            override fun onResponse(call: Call, response: Response) = fn(response, null)
+//
+//        }
+//    }
 
 //Retrofit
 
@@ -38,4 +37,13 @@ object Client {
         .build()
 
     val service = retrofitClient.create(GithubService::class.java)
+
+    fun <T> retrofitCallBack(fn: (Response<T>?, Throwable?) -> Unit): Callback<T> {
+        return object : Callback<T> {
+            override fun onFailure(call: Call<T>?, e: Throwable) = fn(null, e)
+
+            override fun onResponse(call: Call<T>?, response: Response<T>?) = fn(response, null)
+
+        }
+    }
 }

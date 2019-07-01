@@ -1,12 +1,13 @@
 package com.codingblocks.networkingokhttpretrofit
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.codingblocks.networkingokhttpretrofit.Client.retrofitCallBack
 import com.codingblocks.networkingokhttpretrofit.Client.service
 import kotlinx.android.synthetic.main.activity_main.textView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,22 +26,39 @@ class MainActivity : AppCompatActivity() {
 //                    }
 //                }
 //            })
-            service.listUsers().enqueue(object :Callback<GIthubResponse>{
-                override fun onFailure(call: Call<GIthubResponse>, t: Throwable) {
-                }
+        val inflater = LayoutInflater.from(this)
 
-                override fun onResponse(
-                    call: Call<GIthubResponse>,
-                    response: Response<GIthubResponse>
-                ) {
-
-                    runOnUiThread {
-                        textView.text = response.body()?.items.toString()
+        AlertDialog.Builder(this).setTitle("Hello").setMessage("Hello Everyone")
+            .setPositiveButton("Ok") { dialogInterface: DialogInterface, i: Int ->
+                service.listUsers().enqueue(retrofitCallBack { response, throwable ->
+                    response?.let {
+                        runOnUiThread {
+                            textView.text = it.body()?.items.toString()
+                        }
                     }
 
-                }
-
-            })`
+                })
+//                service.listUsers().enqueue(object : Callback<GIthubResponse> {
+//                    override fun onFailure(call: Call<GIthubResponse>, t: Throwable) {
+//                    }
+//
+//                    override fun onResponse(
+//                        call: Call<GIthubResponse>,
+//                        response: Response<GIthubResponse>
+//                    ) {
+//
+//                        runOnUiThread {
+//                            textView.text = response.body()?.items.toString()
+//                        }
+//
+//                    }
+//
+//                })
+            }
+            .setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                dialogInterface.dismiss()
+            }.setCancelable(true)
+            .show()
 
 
     }
