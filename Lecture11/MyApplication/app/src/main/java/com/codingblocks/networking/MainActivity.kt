@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.getData
 import kotlinx.android.synthetic.main.activity_main.githubRv
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -76,11 +75,11 @@ class MainActivity : AppCompatActivity() {
 //                userList.add(user)
 //            }
 
-            val user = Gson().fromJson(result, Github::class.java)
-            userList.addAll(user.items)
+            val user = Gson().fromJson(result, Array<GithubUser>::class.java)
+            userList.addAll(user)
 
             githubRv.layoutManager = LinearLayoutManager(this@MainActivity)
-            githubRv.adapter = GithubAdapter(this@MainActivity,userList)
+            githubRv.adapter = GithubAdapter(this@MainActivity, userList)
 
         }
     }
