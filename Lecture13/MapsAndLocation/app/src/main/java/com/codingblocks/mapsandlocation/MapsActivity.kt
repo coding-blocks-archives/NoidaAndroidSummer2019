@@ -60,14 +60,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener {
         mapFragment.getMapAsync(this)
         if (ActivityCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(
                     android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
                 ),
                 1234
             )
@@ -80,7 +81,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener {
     private fun startLocationUpdates() {
         locMan = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+        locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,
             1000,0f,locLis)
     }
 
