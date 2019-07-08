@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
             TasksTable.insertTask(
                 taskDb, Task(null, etNewItem.text.toString(), true)
             )
-            tasks = TasksTable.getAllTask(taskDb)
-            taskAdapter.notifyDataSetChanged()
+            taskAdapter.updateTasks(TasksTable.getAllTask(taskDb))
         }
 //        val arrayAdapter = ArrayAdapter<Task>(this,android.R.layout.simple_list_item_1)
 //         arrayAdapter.notifyDataSetChanged()

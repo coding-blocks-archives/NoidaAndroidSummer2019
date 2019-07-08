@@ -56,7 +56,19 @@ class TasksTable {
             cursor.close()
             return tasks
 
+        }
 
+        fun deleteTask(db: SQLiteDatabase, id: Int) {
+            db.delete(TABLE_NAME, "id = ?", arrayOf(id.toString()))
+        }
+
+        fun updateTask(db:SQLiteDatabase,task:Task)
+        {
+            val updateRow = ContentValues().apply {
+                put("task",task.task + "hjavshabsdhbamdasdsaksadb")
+                put("done",true)
+            }
+            db.update(TABLE_NAME,updateRow,"id = ?", arrayOf(task.id.toString()))
         }
     }
 
