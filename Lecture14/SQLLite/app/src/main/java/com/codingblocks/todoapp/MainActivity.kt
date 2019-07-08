@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,11 +22,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val dbHelper = SQLliteHelper(this)
+        val taskDb = dbHelper.writableDatabase
+
+        tasks = TasksTable.getAllTask(taskDb)
+
         val taskAdapter = TaskAdapter(tasks)
         lvTodolist.adapter = taskAdapter
 
         btnAdd.setOnClickListener {
-            tasks.add(Task(tasks.size, etNewItem.text.toString(), false))
+            TasksTable.insertTask(
+                taskDb, Task(null, etNewItem.text.toString(), true)
+            )
+            tasks = TasksTable.getAllTask(taskDb)
             taskAdapter.notifyDataSetChanged()
         }
 //        val arrayAdapter = ArrayAdapter<Task>(this,android.R.layout.simple_list_item_1)
