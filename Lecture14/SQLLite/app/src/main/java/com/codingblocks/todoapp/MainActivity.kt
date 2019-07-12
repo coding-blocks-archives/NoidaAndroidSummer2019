@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.btnAdd
 import kotlinx.android.synthetic.main.activity_main.etNewItem
 import kotlinx.android.synthetic.main.activity_main.lvTodolist
@@ -16,11 +19,19 @@ import kotlinx.android.synthetic.main.activity_main.lvTodolist
 class MainActivity : AppCompatActivity() {
 
     var tasks = arrayListOf<Task>()
+    val buttonClicked: MutableLiveData<Boolean> = MutableLiveData()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        buttonClicked.value = true
+
+        buttonClicked.observe(this, Observer {
+            if (it) {
+                Toast.makeText(this@MainActivity, "Live data exampe", Toast.LENGTH_LONG).show()
+            }
+        })
 
         val dbHelper = SQLliteHelper(this)
         val taskDb = dbHelper.writableDatabase
@@ -31,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         lvTodolist.adapter = taskAdapter
 
         btnAdd.setOnClickListener {
+            buttonClicked.value = !buttonClicked.value!!
             TasksTable.insertTask(
                 taskDb, Task(null, etNewItem.text.toString(), true)
             )
