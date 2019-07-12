@@ -2,6 +2,8 @@ package com.codingblocks.roomnotes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,19 +22,39 @@ class MainActivity : AppCompatActivity() {
     }
     var list = arrayListOf<Todo>()
 
+    var formData: MediatorLiveData<Boolean> = MediatorLiveData()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        list = db.todoDao().getAllTask().filter { todo ->
-            todo.task.contains("abc", true)
-        } as ArrayList<Todo>
         val adapter = TaskAdapter(list)
+
+        //Return Value in Synchronous manner
+//        db.todoDao().getAllTask().value
+        //Return value in Async Manner
+        formData.addSource(db.todoDao().getAllTask()) {
+            if (it.isNotEmpty()) {
+                formData.value = false
+            } else {
+                formData.value = true
+                formData.removeSource(db.todoDao().getAllTask())
+            }
+        }
+
+        db.todoDao().getAllTask().observe(this, Observer {
+            list = it.filter { todo ->
+                todo.task.contains("abc", true)
+            } as ArrayList<Todo>
+            adapter.updateTasks(list)
+
+        })
+//        list = db.todoDao().getAllTask().filter { todo ->
+//            todo.task.contains("abc", true)
+//        } as ArrayList<Todo>
         lvTodolist.adapter = adapter
         adapter.listItemClickListener = object : ListItemClickListener {
             override fun lisitemClick(task: Todo, position: Int) {
                 db.todoDao().deleteTask(task)
-                list = db.todoDao().getAllTask() as ArrayList<Todo>
-                adapter.updateTasks(list)
             }
 
         }
@@ -44,8 +66,6 @@ class MainActivity : AppCompatActivity() {
                     status = false
                 )
             )
-            list = db.todoDao().getAllTask() as ArrayList<Todo>
-            adapter.updateTasks(list)
         }
 
 
