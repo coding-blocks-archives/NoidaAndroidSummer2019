@@ -15,8 +15,15 @@
             android:layout_height="wrap_content"
             android:text="Create File"/>
 
+    <Button
+            android:id="@+id/restoreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restore File"/>
+
     <EditText
             android:id="@+id/edtv"
-            android:layout_width="wrap_content" android:layout_height="match_parent"/>
+            android:hint="word"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
 </LinearLayout>

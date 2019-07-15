@@ -16,8 +16,14 @@ class MainActivity : AppCompatActivity() {
         val file = File(filesDir, "myfile.text")
 
         btn.setOnClickListener {
-            file.writeText(edtv.text.toString())
+            //            file.writeText(edtv.text.toString())
+            file.appendText(edtv.text.toString())
             Log.i("FILES", "exists =  ${file.exists()}")
+        }
+
+        restoreBtn.setOnClickListener {
+            val existingfile = file.readText()
+            edtv.setText(existingfile)
         }
 
     }
