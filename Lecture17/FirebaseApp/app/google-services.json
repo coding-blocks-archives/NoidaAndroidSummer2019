@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "121264253804",
+    "firebase_url": "https://noidaproject-b9dc7.firebaseio.com",
+    "project_id": "noidaproject-b9dc7",
+    "storage_bucket": "noidaproject-b9dc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121264253804:android:02ae3440712c8681",
+        "android_client_info": {
+          "package_name": "com.codingblocks.firebaseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121264253804-o8mbm3dgulpvb6npjsflba1b7fv0g1tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codingblocks.firebaseapp",
+            "certificate_hash": "4269d1e7822bf21fc8e7ad45c52a06e20dfcb652"
+          }
+        },
+        {
+          "client_id": "121264253804-srt1f8327ck9595ifv5ojunvbldglji9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJCzy9erEIQiWx9D7Jk3YfLAXCf7kba4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121264253804-srt1f8327ck9595ifv5ojunvbldglji9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
