@@ -45,5 +45,11 @@
             android:text="Sign Up"
             android:id="@+id/btn"
             android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <Button
+            android:text="Signout"
+            android:id="@+id/btn2"
+            android:visibility="gone"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
