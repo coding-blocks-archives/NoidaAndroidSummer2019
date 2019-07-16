@@ -16,23 +16,26 @@ class MainActivity : AppCompatActivity() {
     val auth by lazy {
         FirebaseAuth.getInstance()
     }
+    var verificationId:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        auth.addAuthStateListener {
-            if (it.currentUser != null) {
-                btn.isVisible = false
-                btn2.isVisible = true
-            } else {
-                btn.isVisible = true
-                btn2.isVisible = false
-            }
-        }
+//        auth.addAuthStateListener {
+//            if (it.currentUser != null) {
+//                btn.isVisible = false
+//                btn2.isVisible = true
+//            } else {
+//                btn.isVisible = true
+//                btn2.isVisible = false
+//            }
+//        }
 
         btn2.setOnClickListener {
-            auth.signOut()
+//            auth.signOut()
+            val phoneAuthCredential = PhoneAuthProvider.getCredential(verificationId,password.editText?.text.toString())
+                createAccount(phoneAuthCredential)
         }
 
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -49,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             override fun onCodeSent(p0: String?, p1: PhoneAuthProvider.ForceResendingToken?) {
                 super.onCodeSent(p0, p1)
                 Toast.makeText(this@MainActivity, "Code Sent", Toast.LENGTH_LONG).show()
-
+                verificationId = p0!!
             }
 
         }
