@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val ref = db.child("messages/user1")
+
         db.child("messages")
             .child("user1")
             .addChildEventListener(object : ChildEventListener {
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onChildAdded(snapshot: DataSnapshot, p1: String?) {
                     tv.text = "${tv.text}  ${snapshot.getValue(Todo::class.java)?.text}"
+                    //To get value of child key
+                    // snapshot.key
 
                 }
 
@@ -39,6 +43,14 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+
+        button.setOnClickListener {
+            val todo = Todo()
+            todo.text = editText.text.toString()
+            todo.time = System.currentTimeMillis().toString()
+            val key = ref.push().key
+            ref.child(key!!).setValue(todo)
+        }
 
     }
 }
