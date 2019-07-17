@@ -1,7 +1,9 @@
 package com.codingblocks.firebasedatabase
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -13,16 +15,29 @@ class MainActivity : AppCompatActivity() {
     val db by lazy {
         FirebaseDatabase.getInstance().reference
     }
+    val auth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var uid = auth.uid
 
-        val ref = db.child("messages/user1")
+        auth.addAuthStateListener {
+            if (it.currentUser == null) {
+                auth.signInWithEmailAndPassword("aggarwalpulkit@gmail.com", "12345678")
+            } else {
+                uid = it.uid ?: ""
 
-        db.child("messages")
-            .child("user1")
-            .addChildEventListener(object : ChildEventListener {
+                Toast.makeText(this, "${it.uid}", Toast.LENGTH_LONG).show()
+            }
+        }
+//gDyWp8lMQOXix31SByWh8AqonkJ3
+
+        val ref = db.child("messages/users/gDyWp8lMQOXix31SByWh8AqonkJ3")
+
+        ref.addChildEventListener(object : ChildEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                 }
 
@@ -49,7 +64,9 @@ class MainActivity : AppCompatActivity() {
             todo.text = editText.text.toString()
             todo.time = System.currentTimeMillis().toString()
             val key = ref.push().key
-            ref.child(key!!).setValue(todo)
+            ref.child(key!!).setValue(todo).addOnFailureListener {
+                Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
+            }
         }
 
     }
