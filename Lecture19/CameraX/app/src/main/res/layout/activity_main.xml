@@ -10,5 +10,12 @@
     <TextureView
             android:id="@+id/textureView"
             android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_camera"
+            android:id="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textureView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

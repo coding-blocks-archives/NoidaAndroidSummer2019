@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.util.Rational
 import android.util.Size
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraX
-import androidx.camera.core.Preview
-import androidx.camera.core.PreviewConfig
+import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,9 +36,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
+
+        //to capture the image of a button click
+        val imageCaptureConfig = ImageCaptureConfig.Builder().apply {
+            setTargetAspectRatio(Rational(1,1))
+            setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
+        }.build()
+
+        val imageCapture = ImageCapture(imageCaptureConfig)
+        imageButton.setOnClickListener {
+            val file = File(externalMediaDirs.first(),"${System.currentTimeMillis()}.jpg")
+
+            imageCapture.takePicture(file,object : ImageCapture.OnImageSavedListener{
+                override fun onImageSaved(file: File) {
+                    Toast.makeText(this@MainActivity,"Photo Captured ${file.absolutePath}",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onError(useCaseError: ImageCapture.UseCaseError, message: String, cause: Throwable?) {
+                    Toast.makeText(this@MainActivity,"Error Capturing $message",Toast.LENGTH_LONG).show()
+                }
+
+            })
+        }
+
+        //To get the preview of camera
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetResolution(Size(1080, 1080))
             setTargetAspectRatio(Rational(1, 1))
+            setLensFacing(CameraX.LensFacing.BACK) //to open Rear camera
         }.build()
 
         val preview = Preview(previewConfig)
@@ -50,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
             textureView.surfaceTexture = it.surfaceTexture
         }
-        CameraX.bindToLifecycle(this, preview)
+        CameraX.bindToLifecycle(this, preview,imageCapture)
 
     }
 }
